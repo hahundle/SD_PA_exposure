@@ -5,13 +5,8 @@ BAM Files were indexed at end of alignment
 conda activate rnaseq
 
 ###
-enter directory where files for analyzing are present
-####
+enter directory where genome files for analyzing are present
 
-mkdir -p results/sailor
-
-###
-enter genome folder
 ###
 cd genome
 
