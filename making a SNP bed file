@@ -1,0 +1,57 @@
+###
+BAM Files were indexed at end of alignment 
+####
+
+conda activate rnaseq
+
+###
+enter directory where files for analyzing are present
+####
+
+mkdir -p results/sailor
+
+###
+enter genome folder
+###
+cd genome
+
+####
+Make snp file
+####
+
+#####
+Pull all the SNPs from the file and take only the columns you need
+#######
+
+grep SNP annotation.gtf | cut -f1,4,7> WS275.snps.txt
+
+####
+Create a column containing the pos-1 
+####
+
+awk '{print ($2-1)""$5}' WS275.snps.txt > WS275.snps.minus.txt
+
+########
+column to the original file, reorder the columns, convert to bed file
+#####
+
+awk '{print $1,$4,$2,$3}' WS275.snps.minus.txt > WS275.snps.almost.bed
+
+########
+change file from spaces to tabs (required for bed format) 
+######
+
+cat WS275.snps.almost.bed |tr "" '\t'> WS275.snps.bed
+
+#######
+sort the file with bedtools
+########
+
+bedtools sort -i WS275.snps.bed > WS275.snps.sorted.bed
+
+
+
+
+
+
+
