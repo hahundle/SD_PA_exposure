@@ -24,9 +24,9 @@ scp sailor program downloaded from Yeo lab github/HundleyLab project space
 
 scp sailor-1.0.4 hahundle@carbonate.uits.iu.edu:/geode2/home/u030/hahundle/Carbonate
 
-####
-Mark downloaded programme as executable
-#######
+########################
+Mark downloaded programme as executable within directory
+############################
 
 chmod +x sailor-1.0.4
 
@@ -58,7 +58,7 @@ Change name of yaml
 mv ce11_example.yaml SD01.yaml
 
 #######
-Run Sailor
+Run Sailor within SD directory
 ######
 
 ./sailor-1.0.4 SD01.yaml
