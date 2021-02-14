@@ -1,0 +1,71 @@
+####
+Put items for analysis on Carbonate (not within a directory) either by moving or cp and move
+Need sorted bed file
+  bam file for analysis (Aligned.sortedByCoord.out.bam)
+  genomic.fa file
+  ce11_example.yaml
+####
+
+####
+Make directory for analysis
+#####
+
+mkdir SD01
+
+###
+Load the singularity module
+#####
+
+module load singularity
+
+#####
+scp sailor program downloaded from Yeo lab github/HundleyLab project space
+######
+
+scp sailor-1.0.4 hahundle@carbonate.uits.iu.edu:/geode2/home/u030/hahundle/Carbonate
+
+####
+Mark downloaded programme as executable
+#######
+
+chmod +x sailor-1.0.4
+
+#######
+Open yaml file with vim and edit filenames
+#######
+vim ce11_example.yaml
+
+####
+mode of vim
+#####
+i
+
+####
+update filenames by using arrow keys
+####
+
+####
+save vim file
+###
+
+Press esc
+:x
+
+#####
+Change name of yaml
+#####
+
+mv ce11_example.yaml SD01.yaml
+
+#######
+Run Sailor
+######
+
+./sailor-1.0.4 SD01.yaml
+
+#####
+Data is located within results folder of the SD01 directory
+
+
+
+
