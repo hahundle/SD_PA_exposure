@@ -58,7 +58,7 @@ Change name of yaml
 mv ce11_example.yaml SD01.yaml
 
 #######
-Run Sailor within SD directory
+Run Sailor NOT within SD directory
 ######
 
 ./sailor-1.0.4 SD01.yaml
