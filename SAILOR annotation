@@ -31,7 +31,7 @@ python3 annotator.sailor.py - h
 ############
 Run python script
 ############
-python3 annotator.sailor.py --gtf c_elegans.PRJNA13758.WS275.canonical_geneset.gtf --fwd GSF1440-SD01.fwd.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --rev GSF1440-SD01.rev.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed \
+python3 annotator.sailor.py --gtf c_elegans.PRJNA13758.WS275.canonical_geneset.gtf --fwd GSF1440-SD01.fwd.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --rev GSF1440-SD01.rev.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed 
 --wb c.elegans.WS275.annotation.final.bed --o /N/slate/hahundle/SD_PA_exposure/sailor/SD01.annotated.sites.csv
 
 
