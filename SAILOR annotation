@@ -1,0 +1,43 @@
+######
+create a sailor diretory on slate within your bigger project directory
+######
+
+mkdir sailor
+
+########
+scp your SAILOR output files from Carbonate
+
+Go to carbonate folder - output of sailor (results)
+scp filename.rev.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+scp filename.fwd.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+########
+
+###########
+conda activate sailor environment
+########
+
+conda activate SAILOR_annotation
+
+########
+Make sure python module is loaded and pybedtools is in environment
+#######
+
+#########
+scp WS275 files for wb (c.elegans.WS275.annotation.final.bed) and gtf (c_elegans.PRJNA13758.WS275.canonical_geneset.gtf) as well as sailor python script (annotator.sailor.py)
+#######
+
+#######
+to see required entries for python script open help menu
+##########
+
+python3 annotator.sailor.py - h
+
+############
+Run python script
+############
+python3 annotator.sailor.py --gtf c_elegans.PRJNA13758.WS275.canonical_geneset.gtf --fwd GSF1440-SD01.fwd.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed 
+--rev GSF1440-SD01.rev.sorted.rmdup.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --wb c.elegans.WS275.annotation.final.bed 
+--o /N/slate/hahundle/SD_PA_exposure/sailor/SD01.annotated.sites.csv
+
+
+
