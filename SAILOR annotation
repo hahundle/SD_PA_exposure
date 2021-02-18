@@ -18,10 +18,6 @@ conda activate sailor environment
 
 conda activate SAILOR_annotation
 
-########
-Make sure python module is loaded and pybedtools is in environment
-#######
-
 #########
 scp WS275 files for wb (c.elegans.WS275.annotation.final.bed) and gtf (c_elegans.PRJNA13758.WS275.canonical_geneset.gtf) as well as sailor python script (annotator.sailor.py)
 #######
