@@ -1,0 +1,44 @@
+Open R studio on ThinLinc
+Using Console, load tidyverse
+
+library(“tidyverse”)
+
+library ("DESeq2")
+
+countdata <- read.table("/N/slate/hahundle/SD_PA_exposure/results/counts/counts.tsv", header=TRUE,row.names = 1)
+
+countdata <- countdata[,6:ncol(countdata)]
+
+colnames(countdata)
+
+colnames(countdata) <- gsub("..results.aligned.GSF2276.","",colnames(countdata))
+
+colnames(countdata)
+
+colnames(countdata) <- gsub("_Aligned.sortedByCoord.out.bam","",colnames(countdata))
+
+colnames(countdata)
+
+countdata <- as.matrix(countdata)
+
+countdata <- countdata[,c("adr2minusR1","adr2minusR2","adr2minusR3","A10R1","A10R2","A10R3")]
+
+(condition <- factor(c(rep("b",3),rep("a",3))))
+
+(coldata <- data.frame(row.names=colnames(countdata),condition))
+
+dds <- DESeqDataSetFromMatrix(countData = countdata,colData = coldata, design=~condition)
+
+keep = rowSums(counts(dds)) >= 1
+
+dds <- dds[keep,]
+
+dds <- DESeq(dds)
+
+res <- results(dds)
+
+resdata <- merge(as.data.frame(res),as.data.frame(counts(dds,normalized=TRUE)),by="row.names",sort=FALSE)
+
+names(resdata)[1] <- "Gene"
+
+write.csv(resdata,file="/N/slate/hahundle/Neural_ADR2_GSF2276/results/A10vadr2minusdiffexp.csv")
