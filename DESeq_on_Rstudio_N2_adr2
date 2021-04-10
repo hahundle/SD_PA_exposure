@@ -9,21 +9,25 @@ countdata <- read.table("/N/slate/hahundle/SD_PA_exposure/results/counts/counts.
 
 countdata <- countdata[,6:ncol(countdata)]
 
-colnames(countdata)
 
-colnames(countdata) <- gsub("..results.aligned.GSF2276.","",colnames(countdata))
-
-colnames(countdata)
+colnames(countdata) <- gsub("..results.aligned.","",colnames(countdata))
 
 colnames(countdata) <- gsub("_Aligned.sortedByCoord.out.bam","",colnames(countdata))
 
-colnames(countdata)
+######
+remove columns other than SD01, SD05 (WT), SD02, SD06 (adr2)
+######
+countdata <- countdata[, -1]
+
+##########
+Rename all rows WTrep1, etc using colnames(countdata)[1] <- "WTrep1" command
+###############
 
 countdata <- as.matrix(countdata)
 
-countdata <- countdata[,c("adr2minusR1","adr2minusR2","adr2minusR3","A10R1","A10R2","A10R3")]
+countdata <- countdata[,c("WTRep1","WTRep2","adr2Rep1","adr2Rep2")]
 
-(condition <- factor(c(rep("b",3),rep("a",3))))
+(condition <- factor(c(rep("b",2),rep("a",2))))
 
 (coldata <- data.frame(row.names=colnames(countdata),condition))
 
@@ -41,4 +45,4 @@ resdata <- merge(as.data.frame(res),as.data.frame(counts(dds,normalized=TRUE)),b
 
 names(resdata)[1] <- "Gene"
 
-write.csv(resdata,file="/N/slate/hahundle/Neural_ADR2_GSF2276/results/A10vadr2minusdiffexp.csv")
+write.csv(resdata,file="/N/slate/hahundle/SD_PA_exposure/results/WTvadr2OP50diffexp.csv")
