@@ -2,7 +2,7 @@
 Put items for analysis on Carbonate (not within a directory) either by moving or cp and move
 Need sorted bed file
   bam file for analysis (Aligned.sortedByCoord.out.bam)
-  genomic.fa file
+  assembly.fa file
   ce11_example.yaml
 ####
 
