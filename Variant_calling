@@ -1,0 +1,36 @@
+######
+Make directory for variant calling within slate folder for project (/geode2/home/u030/hahundle/Carbonate/slate/SD_PA_exposure)
+#####
+
+mkdir Variantcall
+
+####
+copy genome file, snp file and aligned bam 
+#####
+
+scp assembly.fasta /geode2/home/u030/hahundle/Carbonate/slate/SD_PA_exposure/Variantcall
+scp WS275.snps.sorted.bed /geode2/home/u030/hahundle/Carbonate/slate/SD_PA_exposure/Variantcall
+scp GSF1440-SD01.bam /geode2/home/u030/hahundle/Carbonate/slate/SD_PA_exposure/Variantcall
+
+###
+Load samtools
+####
+
+module load samtools
+
+####
+remove duplicate reads from bam file (takes ~5 minutes per file)
+####
+
+samtools rmdup GSF1440-SD01.bam inputfile.nodup.bam
+
+####
+Call the variant and clean up the output file with one line (took about 20 minutes for one file)
+####
+
+samtools mpileup -u -I -t DP4 -v -f assembly.fasta inputfile.nodup.bam | awk '$5 != "<*>"' | tail -n +30 > SD01.rmdup.mpileup.vcf
+
+####
+Need to convert vcf to excel format
+####
+
