@@ -34,3 +34,4 @@ samtools mpileup -u -I -t DP4 -v -f assembly.fasta inputfile.nodup.bam | awk '$5
 Need to convert vcf to excel format
 ####
 
+python variant.py --v SD01.rmdup.mpileup.vcf --snp WS275.snps.sorted.bed --o SD01variant.csv
