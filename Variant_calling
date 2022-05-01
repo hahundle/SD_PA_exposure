@@ -31,7 +31,7 @@ Call the variant and clean up the output file with one line (took about 20 minut
 samtools mpileup -u -I -t DP4 -v -f assembly.fasta inputfile.nodup.bam | awk '$5 != "<*>"' | tail -n +30 > SD01.rmdup.mpileup.vcf
 
 ####
-Need to convert vcf to excel format
+Need to convert vcf to excel format but also need to be an environment, works with SAILOR_annotation environment
 ####
 
 python variant.py --v SD01.rmdup.mpileup.vcf --snp WS275.snps.sorted.bed --o SD01variant.csv
