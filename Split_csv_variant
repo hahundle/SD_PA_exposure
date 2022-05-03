@@ -1,0 +1,11 @@
+On ThinLinc, open Rstudio (4.0.4)
+In console window Load tidyverse
+
+####
+library("tidyverse")
+####
+
+load the genomic ranges package
+
+###
+library(
