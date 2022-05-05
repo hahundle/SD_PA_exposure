@@ -8,4 +8,9 @@ library("tidyverse")
 load the genomic ranges package
 
 ###
-library(
+library("GenomicRanges")
+####
+
+If error about BiocGenerics, do this first:
+BiocManager::install(version = "3.12")
+BiocManager::install("BiocGenerics") 
