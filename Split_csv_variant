@@ -18,3 +18,38 @@ BiocManager::install("BiocGenerics")
 
 If error about zlibbiocs, do this first:
 BiocManager::install("zlibbioc")
+
+####
+
+Load the variant csv of interest
+
+###
+variants <- read.csv("/N/slate/hahundle/SD_PA_exposure/Variantcall/SD01variant.csv")
+###
+
+I like to view the table to see how many rows to know where I want to split. Either click on the datatable or type
+
+###
+View(variants)
+#####
+
+slice into parts depending on size
+
+#######
+var1 <- dplyr::slice(variants, 1:500000)
+######
+
+write table 
+
+######
+write.table(var1, "variants_1.tsv", sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
+######
+
+Get off ThinLinc (have other window open) and scp in terminal to desktop
+
+####
+For second cut, use this command:
+
+
+#####
+var2 <- dplyr::slice(variants, 500001:nrow(variants))
