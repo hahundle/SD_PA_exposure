@@ -14,3 +14,7 @@ library("GenomicRanges")
 If error about BiocGenerics, do this first:
 BiocManager::install(version = "3.12")
 BiocManager::install("BiocGenerics") 
+
+
+If error about zlibbiocs, do this first:
+BiocManager::install("zlibbioc")
