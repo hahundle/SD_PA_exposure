@@ -3,8 +3,8 @@ create a sailor diretory on slate within your bigger project directory
 ######
 
 mkdir sailor
-
-########
+cd 
+########s
 scp your SAILOR output files from Carbonate
 
 Go to carbonate folder - output of sailor (results)
