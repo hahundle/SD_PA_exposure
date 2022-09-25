@@ -1,0 +1,43 @@
+Open R studio on ThinLinc (4.1.1)
+Using Console, load tidyverse
+
+library(tidyverse)
+
+library ("DESeq2")
+
+countdata <- read.table("/N/slate/hahundle/SD_PA_exposure/results/counts/counts.tsv", header=TRUE,row.names = 1)
+
+countdata <- countdata[,6:ncol(countdata)]
+
+######
+remove columns other than SD03, SD07 (WTPA14), SD01, SD05 (WTOP50)
+######
+countdata <- countdata[, -1]
+
+##########
+Rename all rows WTrep1, etc using colnames(countdata)[1] <- "WTrep1" command
+###############
+
+countdata <- as.matrix(countdata)
+
+countdata <- countdata[,c("adr2rep1","adr2rep2","WTrep1","WTrep2")]
+
+(condition <- factor(c(rep("b",2),rep("a",2))))
+
+(coldata <- data.frame(row.names=colnames(countdata),condition))
+
+dds <- DESeqDataSetFromMatrix(countData = countdata,colData = coldata, design=~condition)
+
+keep = rowSums(counts(dds)) >= 1
+
+dds <- dds[keep,]
+
+dds <- DESeq(dds)
+
+res <- results(dds)
+
+resdata <- merge(as.data.frame(res),as.data.frame(counts(dds,normalized=TRUE)),by="row.names",sort=FALSE)
+
+names(resdata)[1] <- "Gene"
+
+write.csv(resdata,file="/N/slate/hahundle/SD_PA_exposure/results/WTvadr2OP50diffexp.csv")
