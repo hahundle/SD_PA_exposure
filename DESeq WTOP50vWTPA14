@@ -31,7 +31,7 @@ countdata <- as.matrix(countdata)
 
 countdata <- countdata[,c("WTOP50rep1","WTOP50rep2","WTPA14rep1","WTPA14rep2")]
 
-(condition <- factor(c(rep("b",2),rep("a",2))))
+(condition <- factor(c(rep("a",2),rep("b",2))))
 
 (coldata <- data.frame(row.names=colnames(countdata),condition))
 
@@ -49,4 +49,4 @@ resdata <- merge(as.data.frame(res),as.data.frame(counts(dds,normalized=TRUE)),b
 
 names(resdata)[1] <- "Gene"
 
-write.csv(resdata,file="/N/slate/hahundle/SD_PA_exposure2/results/WTOP50vWTPA14diffexp.csv")
+write.csv(resdata,file="/N/slate/hahundle/SD_PA_exposure2/results/WTOP50vWTPA14diffexp2.csv")
