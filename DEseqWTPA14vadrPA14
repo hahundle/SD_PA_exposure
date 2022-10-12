@@ -1,0 +1,52 @@
+Open R studio on ThinLinc (4.0.4)
+Using Console, load tidyverse
+
+library(tidyverse)
+
+library (DESeq2)
+
+countdata <- read.table("/N/slate/hahundle/SD_PA_exposure2/results/counts/counts.tsv", header=TRUE,row.names = 1)
+
+countdata <- countdata[,6:ncol(countdata)]
+
+######
+remove columns other than SD03, SD07 (WTPA14), SD04, SD08 (adr2PA14)
+######
+
+countdata <- countdata[, -1]
+
+
+remove extra parts of names
+
+####
+colnames(countdata)<-gsub("..results.aligned.GSF144","",colnames(countdata))
+####
+
+
+##########
+Rename all rows WTOP50rep1, etc using colnames(countdata)[1] <- "WTOP50rep1" command
+###############
+
+countdata <- as.matrix(countdata)
+
+countdata <- countdata[,c("WTPA14rep1","WTPA14rep2","adr2PA14rep1","adr2PA14rep2")]
+
+(condition <- factor(c(rep("a",2),rep("b",2))))
+
+(coldata <- data.frame(row.names=colnames(countdata),condition))
+
+dds <- DESeqDataSetFromMatrix(countData = countdata,colData = coldata, design=~condition)
+
+keep = rowSums(counts(dds)) >= 1
+
+dds <- dds[keep,]
+
+dds <- DESeq(dds)
+
+res <- results(dds)
+
+resdata <- merge(as.data.frame(res),as.data.frame(counts(dds,normalized=TRUE)),by="row.names",sort=FALSE)
+
+names(resdata)[1] <- "Gene"
+
+write.csv(resdata,file="/N/slate/hahundle/SD_PA_exposure2/results/WTPA14vadr2PA14diffexp2.csv")
